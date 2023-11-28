@@ -1,0 +1,7 @@
+# .gitignore file
+
+# Python-specific
+__pycache__/
+
+# Other entries...
+.DS_Store
