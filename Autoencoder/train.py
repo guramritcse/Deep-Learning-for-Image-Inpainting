@@ -25,7 +25,7 @@ log_file = open("log.txt", "w")
 # Argument parser
 parser = ArgumentParser()
 parser.add_argument('--niter', type=int, default=1200)
-parser.add_argument('--resume', type=bool, default=False)
+parser.add_argument('--resume', action='store_true')
 args = parser.parse_args()
 
 # Define device

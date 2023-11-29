@@ -39,17 +39,16 @@ def get_mask():
 """
 Generate the input image
 """
-def make_input(labels):
+def make_input(label):
     images = []
     mask = get_mask()
     mask[mask==255] = 1
-    for label in labels:
-        img = np.array(label.cpu().permute(1,2,0).int())
-        img = cv2.resize(img, (128, 128))
-        gen_img = img*(1-mask)
-        gen_img[gen_img==0] = 255
-        gen_img = np.array(torch.tensor(gen_img).cpu().permute(2,0,1).float())
-        images.append(gen_img)
+    img = np.array(label.cpu().int())
+    img = cv2.resize(img, (128, 128))
+    gen_img = img*(1-mask)
+    gen_img[gen_img==0] = 255
+    gen_img = np.array(torch.tensor(gen_img).cpu().permute(2,0,1).float())
+    images.append(gen_img)
     mask[mask==1] = 255
     mask = np.array(torch.tensor(mask).cpu().permute(2,0,1).float())
     return torch.tensor(np.array(images)).to(device),torch.tensor(mask).to(device)
@@ -77,8 +76,10 @@ with torch.no_grad():
     if args.mask:
         data = data_inp
         data = data.cpu().permute(2,0,1).float()
-        mask = get_mask()
+        mask = cv2.imread(args.mask)
+        mask = cv2.resize(mask, (128, 128))
         mask = torch.tensor(mask).to(device)
+        mask = mask.cpu().permute(2,0,1).float()
     else:
         data,mask = make_input(data_inp)
     # Get the output

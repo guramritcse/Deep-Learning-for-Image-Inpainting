@@ -31,7 +31,6 @@ def read_image_tensor(image_folder,transform):
     for images in os.listdir(image_folder):
         img = torchvision.io.read_image(os.path.join(image_folder,images)).float()
         all_images.append(transform(img))
-    print(f"Done with Animals")
     return torch.stack(all_images).to(device)
 
 """
@@ -69,7 +68,8 @@ base_transform = transforms.Compose(
 )
 
 # read the dataset
-dataset = read_image_tensor("../animals_test", base_transform)
+data_path = "../animals_test"
+dataset = read_image_tensor(data_path, base_transform)
 
 # define the dataloader
 test_loader = DataLoader(dataset=dataset,
@@ -81,6 +81,11 @@ Test the model on test set
 """
 # Load the last model
 model = torch.load('autoencoder.pth', map_location=torch.device('cpu'))
+
+# Make the output directory if it doesn't exist
+save_path = "./animals_test_out"
+if not os.path.exists(save_path):
+    os.makedirs(save_path)
 
 img_num = 0
 with torch.no_grad():
