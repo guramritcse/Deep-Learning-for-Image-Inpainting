@@ -247,7 +247,7 @@ def make_color_wheel():
     return colorwheel
 
 def is_image_file(filename):
-    IMG_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.ppm', '.bmp', '.pgm', '.tif']
+    IMG_EXTENSIONS =  ['.png', '.jpg', '.jpeg', '.bmp']
     filename_lower = filename.lower()
     return any(filename_lower.endswith(extension) for extension in IMG_EXTENSIONS)
 
