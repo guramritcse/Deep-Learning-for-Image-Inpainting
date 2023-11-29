@@ -1,9 +1,6 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from scipy.linalg import sqrtm
-from keras.applications.inception_v3 import InceptionV3
-from keras.applications.inception_v3 import preprocess_input
 from skimage.transform import resize
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 from torchmetrics.image import TotalVariation
@@ -30,7 +27,7 @@ The following loss functions are defined in this file:
 
 # Set seed for reproducibility
 def set_seed():
-    torch.manual_seed(123)
+    torch.manual_seed(42)
     np.random.seed(42)
 
 # Mean Squared Error
@@ -85,39 +82,6 @@ def scale_images(images):
         new_image = new_image / 255.0
         images_list.append(new_image)
     return np.asarray(images_list)
-
-# The FID (Fréchet Inception Distance) score is commonly calculated using the InceptionV3 model, 
-# The choice of the InceptionV3 model is based on its effectiveness in capturing features relevant to 
-# image quality and diversity. 
-# The FID score compares the statistics of feature representations (specifically, the activations in one of the intermediate layers) 
-# of real and generated images.
-# Reference: https://machinelearningmastery.com/how-to-implement-the-frechet-inception-distance-fid-from-scratch/#:~:text=The%20Frechet%20Inception%20Distance%20score,for%20real%20and%20generated%20images.
-def fid(orig_imgs, out_imgs, img_sz=(256, 256)):
-    set_seed()
-    # prepare the inception v3 model
-    model = InceptionV3(include_top=False, pooling='avg', input_shape=(299,299,3))
-    # resize images
-    images1 = resize_images(orig_imgs, (299,299,3))
-    images2 = resize_images(out_imgs, (299,299,3))
-    # pre-process images
-    images1 = preprocess_input(images1)
-    images2 = preprocess_input(images2)
-    # calculate activations
-    act1 = model.predict(images1)
-    act2 = model.predict(images2)
-    # calculate mean and covariance statistics
-    mu1, sigma1 = act1.mean(axis=0), np.cov(act1, rowvar=False)
-    mu2, sigma2 = act2.mean(axis=0), np.cov(act2, rowvar=False)
-    # calculate sum squared difference between means
-    ssdiff = np.sum((mu1 - mu2)**2.0)
-    # calculate sqrt of product between cov
-    covmean = sqrtm(sigma1.dot(sigma2))
-    # check and correct imaginary numbers from sqrt
-    if np.iscomplexobj(covmean):
-        covmean = covmean.real
-    # calculate score
-    fid = ssdiff + np.trace(sigma1 + sigma2 - 2.0 * covmean)
-    return fid
 
 ## LPIPS - Learned Perceptual Image Patch Similarity
 # Reference: https://torchmetrics.readthedocs.io/en/stable/image/learned_perceptual_image_patch_similarity.html

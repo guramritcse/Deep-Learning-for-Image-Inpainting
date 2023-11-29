@@ -3,7 +3,9 @@ import numpy as np
 import cv2
 import os
 import torch.nn as nn
-from ..utils.losses import mse, l1, psnr, fid, lpips, tv
+import sys
+sys.path.append('..')
+from utils.losses import mse, l1, psnr, lpips, tv
 
 # Inpainting using Navier-Stokes algorithm
 # https://docs.opencv.org/3.4/df/d3d/tutorial_py_inpainting.html
@@ -36,6 +38,11 @@ def get_scores(dataset_path, save_path, img_sz, loss_fns=[nn.MSELoss()], method=
     # list of original and inpainted images
     orig_imgs = []
     out_imgs = []
+
+    # create the save path if it doesn't exist
+    if save:
+        if not os.path.exists(save_path):
+            os.makedirs(save_path)
 
     for entry in os.listdir(dataset_path):
 
@@ -102,8 +109,8 @@ if __name__ == "__main__":
     save_path = "./animals_test_out"
 
     # get scores
-    scores_telea = get_scores(dataset_path, save_path, (256, 256), loss_fns=[mse, l1, psnr, fid, lpips, tv], method="telea")
-    scores_ns = get_scores(dataset_path, save_path, (256, 256), loss_fns=[mse, l1, psnr, fid, lpips, tv], method="ns")
+    scores_telea = get_scores(dataset_path, save_path, (256, 256), loss_fns=[mse, l1, psnr, lpips, tv], method="telea")
+    scores_ns = get_scores(dataset_path, save_path, (256, 256), loss_fns=[mse, l1, psnr, lpips, tv], method="ns")
 
     # get the average score
     print("Average MSE score for Telea's algorithm: ", scores_telea[0])
@@ -112,9 +119,7 @@ if __name__ == "__main__":
     print("Average L1 score for Navier-Stokes algorithm: ", scores_ns[1])
     print("Average PSNR score for Telea's algorithm: ", scores_telea[2])
     print("Average PSNR score for Navier-Stokes algorithm: ", scores_ns[2])
-    print("Average FID score for Telea's algorithm: ", scores_telea[3])
-    print("Average FID score for Navier-Stokes algorithm: ", scores_ns[3])
-    print("Average LPIPS score for Telea's algorithm: ", scores_telea[4])
-    print("Average LPIPS score for Navier-Stokes algorithm: ", scores_ns[4])
-    print("Average TV score for Telea's algorithm: ", scores_telea[5])
-    print("Average TV score for Navier-Stokes algorithm: ", scores_ns[5])
+    print("Average LPIPS score for Telea's algorithm: ", scores_telea[3])
+    print("Average LPIPS score for Navier-Stokes algorithm: ", scores_ns[3])
+    print("Average TV score for Telea's algorithm: ", scores_telea[4])
+    print("Average TV score for Navier-Stokes algorithm: ", scores_ns[4])

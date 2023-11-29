@@ -1,7 +1,7 @@
 import cv2
 import os
 import torch.nn as nn
-from utils.losses import mse, l1, psnr, fid, lpips, tv
+from utils.losses import mse, l1, psnr, lpips, tv
 
 def get_scores(dataset_path, loss_fns=[nn.MSELoss()], img_sz=(256, 256)):
     
@@ -49,13 +49,12 @@ if __name__ == "__main__":
     ind = 0
 
     # get scores
-    scores = get_scores(dataset_path[ind], loss_fns=[mse, l1, psnr, fid, lpips, tv], img_sz=(256, 256))
+    scores = get_scores(dataset_path[ind], loss_fns=[mse, l1, psnr, lpips, tv], img_sz=(256, 256))
 
     # get the average score
     out_file = open(save_path[ind], "w")
     out_file.write(f"Average MSE score for {print_val[ind]}'s algorithm: {scores[0]}\n")
     out_file.write(f"Average L1 score for {print_val[ind]}'s algorithm: {scores[1]}\n")
     out_file.write(f"Average PSNR score for {print_val[ind]}'s algorithm: {scores[2]}\n")
-    out_file.write(f"Average FID score for {print_val[ind]}'s algorithm: {scores[3]}\n")
-    out_file.write(f"Average LPIPS score for {print_val[ind]}'s algorithm: {scores[4]}\n")
-    out_file.write(f"Average TV score for {print_val[ind]}'s algorithm: {scores[5]}\n")
+    out_file.write(f"Average LPIPS score for {print_val[ind]}'s algorithm: {scores[3]}\n")
+    out_file.write(f"Average TV score for {print_val[ind]}'s algorithm: {scores[4]}\n")
