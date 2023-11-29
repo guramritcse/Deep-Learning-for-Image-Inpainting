@@ -6,8 +6,10 @@ import torch.nn as nn
 import torch.backends.cudnn as cudnn
 import torchvision.utils as vutils
 from models import Generator
-from ..utils.tools import get_config, random_bbox, mask_image, is_image_file, image_loader, normalize, get_model_list
 from dataset import Dataset
+import sys
+sys.path.append('..')
+from utils.tools import get_config, random_bbox, mask_image, is_image_file, image_loader, normalize, get_model_list
 
 # Parse arguments
 parser = ArgumentParser()

@@ -7,7 +7,9 @@ import torch.backends.cudnn as cudnn
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from models import Generator
-from ..utils.tools import get_config, image_loader, normalize, get_model_list
+import sys
+sys.path.append('..')
+from utils.tools import get_config, image_loader, normalize, get_model_list
 
 # Parse arguments
 parser = ArgumentParser()
@@ -53,11 +55,10 @@ with torch.no_grad():
     mask = transforms.CenterCrop(config['image_shape'][:-1])(mask)
     mask = transforms.ToTensor()(mask)[0].unsqueeze(dim=0)
 
-    mask2 = torch.zeros_like(mask)
-
     data = data * (1. - mask)
     data = data.unsqueeze(dim=0)
     mask = mask.unsqueeze(dim=0)
+    mask2 = torch.zeros_like(mask)
 
     # Define the checkpoint path
     if not args.checkpoint_path:

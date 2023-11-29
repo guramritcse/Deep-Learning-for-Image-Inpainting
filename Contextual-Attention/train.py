@@ -10,7 +10,9 @@ import torchvision.utils as vutils
 from tensorboardX import SummaryWriter
 from trainer import Trainer
 from dataset import Dataset
-from ..utils.tools import get_config, random_bbox, mask_image,get_logger
+import sys
+sys.path.append('..')
+from utils.tools import get_config, random_bbox, mask_image,get_logger
 
 # Parse arguments
 parser = ArgumentParser()

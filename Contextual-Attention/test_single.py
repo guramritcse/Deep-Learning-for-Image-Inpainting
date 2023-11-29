@@ -7,7 +7,9 @@ import torch.backends.cudnn as cudnn
 import torchvision.transforms as transforms
 import torchvision.utils as vutils
 from models import Generator
-from ..utils.tools import get_config, image_loader, normalize, get_model_list
+import sys
+sys.path.append('..')
+from utils.tools import get_config, image_loader, normalize, get_model_list
 
 # Parse arguments
 parser = ArgumentParser()

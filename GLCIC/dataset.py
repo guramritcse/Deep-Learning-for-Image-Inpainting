@@ -1,8 +1,10 @@
 import torch.utils.data as data
 from os import listdir
-from ..utils.tools import image_loader, is_image_file, normalize
 import os
 import torchvision.transforms as transforms
+import sys
+sys.path.append('..')
+from utils.tools import image_loader, is_image_file, normalize
 
 """
 Dataset that loads training and test data.

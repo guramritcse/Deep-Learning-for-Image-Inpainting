@@ -33,7 +33,7 @@ if torch.cuda.is_available():
     device = 'cuda'
 else:
     device = 'cpu'
-log_file.write(f"Device: {device}\n", flush = True)
+log_file.write(f"Device: {device}\n")
 
 """
 Load the dataset
@@ -86,8 +86,8 @@ train_set = read_image_tensor("../animals_train", base_transform)
 test_set = read_image_tensor("../animals_test", base_transform)
 
 # print the size of the dataset
-log_file.write(f"Train set: {len(train_set)}\n", flush=True)
-log_file.write(f"Test set: {len(test_set)}\n",flush =True)
+log_file.write(f"Train set: {len(train_set)}\n")
+log_file.write(f"Test set: {len(test_set)}\n")
 
 # define the dataloader
 train_loader = DataLoader(dataset=train_set,
@@ -126,7 +126,7 @@ def train_model(model, loss_fn, optimizer, num_epochs, train_loader):
         torch.save(model, f'autoencoder.pth')
         avg_train_loss=sum(loss_batches)/len(loss_batches)
         train_losses.append(avg_train_loss)
-        log_file.write('Epoch [{}/{}], Loss: {:.4f}\n'.format(epoch+1, num_epochs, avg_train_loss), flush = True)
+        log_file.write('Epoch [{}/{}], Loss: {:.4f}\n'.format(epoch+1, num_epochs, avg_train_loss))
         print('Epoch [{}/{}], Loss: {:.4f}\n'.format(epoch+1, num_epochs, avg_train_loss))
     return train_losses
 
@@ -139,7 +139,7 @@ epochs = args.niter
 
 # Train the model
 train_losses=train_model(model, loss, optimizer, epochs, train_loader)
-log_file.write(f'train_loss: {train_losses}\n', flush = True)
+log_file.write(f'train_loss: {train_losses}\n')
 
 
 """
@@ -156,4 +156,4 @@ with torch.no_grad():
         data, mask = make_input(data)
         recon = model(data,mask)
         losses.append(nn.MSELoss()(recon, data).item())
-    log_file.write(f"Average Test Reconstruction Loss: {sum(losses)/len(losses)}\n", flush = True)
+    log_file.write(f"Average Test Reconstruction Loss: {sum(losses)/len(losses)}\n")

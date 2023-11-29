@@ -3,7 +3,9 @@ import torch
 import torch.nn as nn
 from torch import autograd
 from models import Generator, LocalDis, GlobalDis
-from ..utils.tools import get_model_list, local_patch, spatial_discounting_mask, get_logger
+import sys
+sys.path.append('..')
+from utils.tools import get_model_list, local_patch, spatial_discounting_mask, get_logger
 
 logger = get_logger()
 
