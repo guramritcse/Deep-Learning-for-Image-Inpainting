@@ -10,7 +10,7 @@ import torch.backends.cudnn as cudnn
 import torchvision.utils as vutils
 from tensorboardX import SummaryWriter
 from trainer import Trainer
-from GLCIC.dataset import Dataset
+from dataset import Dataset
 import sys
 sys.path.append('..')
 from utils.tools import get_config, random_bbox, mask_image, get_logger
