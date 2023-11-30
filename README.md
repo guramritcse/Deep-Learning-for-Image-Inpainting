@@ -2,10 +2,12 @@
 This repository contains the code and report of the course project - Deep Learning for Image Inpainting, for the course CS 337 - Machine Learning and Artificial Intelligence, Autumn 2023, IIT Bombay.
 
 ### Team Lingua Franca
-* Biradar Nikhil
-* Guramrit Singh
-* Omm Agrawal
-* Sabyasachi Samantaray
+| Name | Roll Number |
+| --- | --- |
+| Biradar Nikhil | 210050035 |
+| Guramrit Singh | 210050061 |
+| Omm Agrawal | 210050110 |
+| Sabyasachi Samantaray | 210050138 |
 
 ## Abstract
 Recent deep learning approaches to Image Inpainting have taken over the statistical methods which solely were
@@ -60,6 +62,7 @@ python3 test_single.py --input <path_to_image> --output <path_to_output_image> -
 
 ## Autoencoder
 * Navigate to [Autoencoder](./Autoencoder/) folder. 
+* For continuing training from a checkpoint or testing, download the `autoencoder.pth` file from [AutoEncoder](https://iitbacin-my.sharepoint.com/:f:/g/personal/210050035_iitb_ac_in/EgWxZCttLY5PpnalGrCBiYIBTTu-RueRN5Xi34y9u6MBJA?e=UnRFiT) and place it in the [Autoencoder](./Autoencoder/) folder.
 * To train the model from scratch, run the following command:
 ```
 python3 train.py --niter <number_of_iterations>
@@ -79,7 +82,8 @@ python3 test_all.py
 
 ## GLCIC
 * Navigate to [GLCIC](./GLCIC/) folder.
-* Configurations for training and testing can be found in [train.yaml](./GLCIC/configs/train.yaml) and [test.yaml](./GLCIC/configs/test.yaml) respectively inside the [configs](./GLCIC/configs/) folder.
+* For continuing training from a checkpoint or testing, download the `animals/` folder from [GLCIC](https://iitbacin-my.sharepoint.com/:f:/g/personal/210050035_iitb_ac_in/EgWxZCttLY5PpnalGrCBiYIBTTu-RueRN5Xi34y9u6MBJA?e=UnRFiT) and place it in the [checkpoints](./GLCIC/checkpoints) folder.
+* Configurations for training and testing can be found in [train.yaml](./GLCIC/configs/train.yaml) and [test.yaml](./GLCIC/configs/test.yaml) respectively inside the [configs](./GLCIC/configs/) folder and can be changed accordingly.
 * To train the model, run the following command:
 ```
 python3 train.py --config <path_to_config_file>
@@ -95,7 +99,8 @@ python3 test_all.py --config <path_to_config_file> --test_iter <iteration_number
 
 ## Contextual Attention
 * Navigate to [Contextual_Attention](./Contextual-Attention/) folder.
-* Configurations for training and testing can be found in [train.yaml](./Contextual-Attention/configs/train.yaml) and [test.yaml](./Contextual-Attention/configs/test.yaml) respectively inside the [configs](./Contextual-Attention/configs/) folder.
+* For continuing training from a checkpoint or testing, download the `animals/` folder and/or `imagenet/` from [Contextual-Attention](https://iitbacin-my.sharepoint.com/:f:/g/personal/210050035_iitb_ac_in/EgWxZCttLY5PpnalGrCBiYIBTTu-RueRN5Xi34y9u6MBJA?e=UnRFiT) and place it in the [checkpoints](./Contextual-Attention/) folder.
+* Configurations for training and testing can be found in [train.yaml](./Contextual-Attention/configs/train.yaml) and [test.yaml](./Contextual-Attention/configs/test.yaml) respectively inside the [configs](./Contextual-Attention/configs/) folder and can be changed accordingly.
 * To train the model, run the following command:
 ```
 python3 train.py --config <path_to_config_file>
@@ -109,15 +114,21 @@ python3 test_single.py --config <path_to_config_file> --input <path_to_image> --
 python3 test_all.py --config <path_to_config_file> --test_iter <iteration_number>
 ```
 
+## Utilities
+The auxiliary functions used for training and testing can be found in the [utils](./utils/) folder.
+
+### Manual Masking
+To generate your own masked images, run the following command:
+```
+python3 manual_masking.py --manual --input <path_to_image> --output <path_to_output_image> --mask <path_to_output_mask>
+```
+
 ## Report
-The report and presentation can be found in the [Report](./Report) folder.
+The report, presentation and related material can be found in the [Report](./Report) folder.
 
-## References
-[1] Pathak, Deepak & Krahenbuhl, Philipp & Donahue, Jeff & Darrell, Trevor & Efros, Alexei. (2016). Context Encoders: Feature Learning by Inpainting. 2536-2544. 10.1109/CVPR.2016.278.
+## References 
 
-[2] Iizuka, Satoshi & Simo-Serra, Edgar & Ishikawa, Hiroshi. (2017). Globally and locally consistent image completion. ACM Transactions on Graphics. 36. 1-14. 10.1145/3072959.3073659. 
+[1] Yu, Jiahui & Lin, Zhe & Yang, Jimei & Shen, Xiaohui & Lu, Xin. (2018). Generative Image Inpainting with Contextual Attention. 5505-5514. 10.1109/CVPR.2018.00577. 
 
-[3] Yu, Jiahui & Lin, Zhe & Yang, Jimei & Shen, Xiaohui & Lu, Xin. (2018). Generative Image Inpainting with Contextual Attention. 5505-5514. 10.1109/CVPR.2018.00577. 
-
-[4] Official Github, by authors of Contextual Attention: https://github.com/JiahuiYu/generative_inpainting/tree/v1.0.0, Reference codes by independent developers: [Daa223's Github Code](https://github.com/daa233/generative-inpainting-pytorch), [Zuroke's WaterMark Removal](https://github.com/zuruoke/watermark-removal), 
+[2] Official Github, by authors of Contextual Attention: https://github.com/JiahuiYu/generative_inpainting/tree/v1.0.0, Reference codes by independent developers: [Daa223's Github Code](https://github.com/daa233/generative-inpainting-pytorch), [Zuroke's WaterMark Removal](https://github.com/zuruoke/watermark-removal), 
 [WonwoongCho's Github Code](https://github.com/WonwoongCho/Generative-Inpainting-pytorch).

@@ -1,7 +1,7 @@
 import cv2
 import os
 import torch.nn as nn
-from utils.losses import mse, l1, psnr, lpips, tv
+from losses import mse, l1, psnr, lpips, tv
 
 def get_scores(dataset_path, loss_fns=[nn.MSELoss()], img_sz=(256, 256)):
     
