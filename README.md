@@ -1,7 +1,7 @@
 # Deep Learning for Image Inpainting
 This repository contains the code and report of the course project - Deep Learning for Image Inpainting, for the course CS 337 - Machine Learning and Artificial Intelligence, Autumn 2023, IIT Bombay.
 
-### Team Lingua Franca
+### Team Members
 | Name | Roll Number |
 | --- | --- |
 | Biradar Nikhil | 210050035 |

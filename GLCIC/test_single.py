@@ -73,7 +73,7 @@ with torch.no_grad():
 
     # Load the trained model
     last_model_name = get_model_list(checkpoint_path, "gen", iteration=args.test_iter)
-    netG.load_state_dict(torch.load(last_model_name))
+    netG.load_state_dict(torch.load(last_model_name, map_location=torch.device(device='cpu')))
     model_iteration = int(last_model_name[-11:-3])
     print(f"Loaded model from {checkpoint_path} at iteration {model_iteration}")
 

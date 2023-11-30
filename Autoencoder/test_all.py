@@ -95,7 +95,7 @@ with torch.no_grad():
         recon = model(data,mask)
         # Save the images
         for i in range(len(data)):
-            plt.imsave(f"./animals_test_out/{img_num}_orig.png",data_inp[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
-            plt.imsave(f"./animals_test_out/{img_num}_mask.png",data[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
-            plt.imsave(f"./animals_test_out/{img_num}_recon.png",recon[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
+            plt.imsave(f"./{save_path}/{img_num}_orig.png",data_inp[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
+            plt.imsave(f"./{save_path}/{img_num}_mask.png",data[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
+            plt.imsave(f"./{save_path}/{img_num}_recon.png",recon[i].int().cpu().numpy().transpose((1, 2, 0)).astype(np.uint8))
             img_num += 1

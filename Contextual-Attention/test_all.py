@@ -68,6 +68,11 @@ with torch.no_grad():
 
     iterable_test_loader = iter(test_loader)
     img_num = 0    
+
+    if config["test_img_save"]:
+        if not os.path.exists(config["test_out_dir"]):
+            os.makedirs(config["test_out_dir"])
+    
     while True:
         try:
             ground_truth = next(iterable_test_loader)
