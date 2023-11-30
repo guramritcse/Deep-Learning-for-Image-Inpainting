@@ -19,8 +19,7 @@ by statistical methods. Deep Learning Approaches have shown
 promising results, yet they require large datasets. In this study
 we replicate two such architectures proposed in literature, the
 GLCIC and Contextual Attention based model and give a
-comprehensive analytical review on a smaller dataset (5400
-images of 90 different animals)
+comprehensive analytical review on a smaller dataset.
 
 ## Dataset
 We have used [two datasets](https://iitbacin-my.sharepoint.com/:f:/g/personal/210050035_iitb_ac_in/EpTqLEiJSblNidfRT_pambQBmEcCwSiStBzHGn8w4HnGzw?e=IfDT4A) for our experiments:
